@@ -4,18 +4,19 @@ from pyswarm import pso
 import utils
 
 
-def train(train_data, train_labels, mod):
+def train(train_data, train_labels, mod, hyperparams):
     """
     """
 
     # Set hyperparameters:
+    lam, eta, batch_size = (hyperparams['lam'],hyperparams['eta'],hyperparams['batch_size'])
+
+    if 'swarm_size' in list(hyperparams.keys()):
+        swarm_size =  hyperparams['swarm_size']
+    else:
+        swarm_size = 70
+
     num_epochs = 20
-    swarm_size = 10
-    batch_size = 10
-    lam = .33
-    eta = 1.0
-
-
     n = len(train_data[0])
     # print("n: %d" % n)
 
