@@ -14,6 +14,7 @@ start = time.time()
 
 parser = argparse.ArgumentParser(description='Train model')
 parser.add_argument("--savefile", help="filename to save params", type=str)
+parser.add_argument("--resumefile", help="filename to resume params from", type=str)
 # parser.add_argument("--data", help="bw, grey, or mnist", type = str, default = 'mnist')
 parser.add_argument("--method", help="pyswarm or spsa", type = str, default = 'spsa')
 parser.add_argument("--sigopt", help="optimze hyperparameters: True or False", type = bool, default = False)
