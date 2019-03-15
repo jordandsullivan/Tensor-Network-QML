@@ -21,7 +21,7 @@ def train(train_data, train_labels, mod, method, hyperparams):
         hyperparams.update({'swarm_size':0})
     elif method == 'evolve':
         hyperparams.update({'mutate':0, 'recombine':0})
-        
+
     keys = hyperparams.keys()
     #Define model hyperparameter ranges
     lam_range = [0,1]
@@ -38,12 +38,12 @@ def train(train_data, train_labels, mod, method, hyperparams):
     recombine_range = [0,1]
 
     #Particle Swarm
-    swarm_size_range = [50,1000]
+    swarm_size_range = [50,100]
 
     #Define overall parameters for sigopt
     parameters = []
     for i in keys:
-        if i == 'batch_size':
+        if i == 'batch_size' or i == 'swarm_size':
             parameters.append(dict(name=i, type='int', bounds=dict(min=eval(i+'_range')[0], max=eval(i+'_range')[1])))
         else:
             parameters.append(dict(name=i, type='double', bounds=dict(min=eval(i+'_range')[0], max=eval(i+'_range')[1])))
@@ -70,4 +70,5 @@ def train(train_data, train_labels, mod, method, hyperparams):
         )
 
     hyperparams = suggestion.assignments
+    np.savetxt("hyper_params/" + args.savefile, hyperparams, delimiter = ",")
     return hyperparams, mod

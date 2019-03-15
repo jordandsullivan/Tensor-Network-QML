@@ -40,7 +40,5 @@ else:
 
 if params is not None:
     np.savetxt("params/" + args.savefile, params, delimiter = ",")
-if hyperparams:
-    np.savetxt("hyper_params/" + args.savefile, hyperparams, delimiter = ",")
 test.get_accuracy(test_data, test_labels, mod, params)
 print('Total training time:',(time.time()-start)/60,'minutes')

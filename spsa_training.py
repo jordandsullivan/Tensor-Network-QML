@@ -19,7 +19,7 @@ def train(train_data, train_labels, mod, hyperparams):
         a = .03
 
     if 'c' in list(hyperparams.keys()):
-        a = hyperparams['c']
+        c = hyperparams['c']
     else:
         c = .1
     num_iterations = 40 #100
