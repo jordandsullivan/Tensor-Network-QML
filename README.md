@@ -1,4 +1,5 @@
 To train:
-python train.py --savefile <name for params file> --data <mnist/bw/grey> --method <spsa/pyswarm>
+python train.py --savefile <params_filename> --data <mnist/bw/grey> --method <spsa/pyswarm>
+
 To test:
-python test.py --file <params file> --data <mnist/bw/grey>
+python test.py --file <params_filename> --data <mnist/bw/grey>
