@@ -1,5 +1,6 @@
+#!/usr/bin/env python3
 import pyswarm_training
-import spsa_training
+import spsa
 import evolve_training
 import sigopt_training
 
@@ -15,9 +16,7 @@ def train(train_data, train_labels, mod, method, hyperparams):
     """
     """
     #Add model hyperparameters to be optimized
-    if method =='spsa':
-        hyperparams.update({'a':0, 'c':0})
-    elif method =='pyswarm':
+    if method =='pyswarm':
         hyperparams.update({'swarm_size':0})
     elif method == 'evolve':
         hyperparams.update({'mutate':0, 'recombine':0})
@@ -31,7 +30,15 @@ def train(train_data, train_labels, mod, method, hyperparams):
     ###Define method hyperparamater ranges
     #SPSA
     a_range = [0,1]
-    c_range = [0,1]
+    b_range = [0,1]
+    A_range = [20,100]
+    gamma_range = [0,1]
+    t_range = [0,1]
+    s_range =[0,10]
+
+    hyperparams = dict({'lam':.234, 'eta':5.59, 'batch_size':25,'a':28.0,
+                        'b':33.0, 'A':74.1, 'gamma':0.882, 't':0.658, 's':4.13})
+
 
     #Evolutionary:
     mutate_range = [0,2]
@@ -58,10 +65,10 @@ def train(train_data, train_labels, mod, method, hyperparams):
     # Evaluate your model with the suggested parameter assignments
 
     def evaluate_model(assignments):
-        return eval(method+'_training').train(train_data, train_labels, mod, assignments)
+        return eval(method).train(train_data, train_labels, mod, assignments)
 
     # Run the Optimization Loop between 10x - 20x the number of parameters
-    for _ in range(30):
+    for _ in range(90):
         suggestion = conn.experiments(experiment.id).suggestions().create()
         value = evaluate_model(suggestion.assignments)
         conn.experiments(experiment.id).observations().create(

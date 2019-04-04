@@ -1,11 +1,8 @@
 import numpy as np
 import math
-<<<<<<< HEAD
 import model_simulate_wf as model
-=======
 # import model_full_simulate_wf as model
 import model
->>>>>>> 70109a67a83384d027c32048db0128291d730729
 import utils
 import argparse
 from tqdm import tqdm

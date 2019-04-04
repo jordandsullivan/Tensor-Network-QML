@@ -10,7 +10,8 @@ def train(train_data, train_labels, mod, hyperparams, params=None):
     """
     """
 
-    locals().update(hyperparams) #More convenient for calling variables
+    num_iterations = 20 #num epochs
+    globals().update(hyperparams) #More convenient for calling variables
 
     # n = len(train_data[0])
     # print("n: %d" % n)
